@@ -1,0 +1,54 @@
+---
+title: 'Title'
+author: "Author"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  html_document:
+    self_contained: yes
+    toc: yes
+    toc_float: yes
+    code_folding: "show"
+    template: resources/template_lifecycle.html
+    css: resources/html_report.css
+logo: lifecycle-large.jpg
+---
+
+***
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+# Loading libraries
+```{r libraries, echo=TRUE, message=FALSE, warning=FALSE}
+#Always good to load the tidyverse library
+library(tidyverse)
+library(jtools)
+library(broom)
+
+# set the theme as the minimal theme for ggplot
+theme_set(theme_minimal())
+
+```
+
+# Introduction
+Here one can write an overview of the project
+
+# Analysis
+
+```{r regression, echo=TRUE, message=FALSE, warning=FALSE}
+m1 <- lm(Sepal.Length ~ Petal.Width, data = iris)
+
+export_summs(m1)
+
+```
+
+
+# Plot
+```{r iris plot , echo=TRUE, message=FALSE, warning=FALSE}
+ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width, col=Species)) + geom_point()
+
+```
+
+
